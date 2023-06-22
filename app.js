@@ -215,7 +215,10 @@ document.addEventListener('DOMContentLoaded', () =>  {
     }
   }
 
-  //check if there are no zeros on the board to lose
+  //For each square checks if it is not on the right edge of the board, and if it's equal to its right neighbor or 
+  //if either of them is zero. Do the same check for the below neighbor if the square is not on the bottom edge of
+  // the board. If any square is equal to its right or below neighbor, or if there is any zero, set gameover to false
+  // and breaks the loop, since it means there are still moves available. If there is no any, it means there are no more moves available, and the game is over.
   function checkForGameOver() {
     let zeros = 0
     for (let i=0; i < squares.length; i++) {
@@ -228,6 +231,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
       document.removeEventListener('keyup', control)
     }
   }
+
    //clear timer
    function clear() {
     clearInterval(myTimer)
