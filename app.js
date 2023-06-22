@@ -24,8 +24,19 @@ document.addEventListener('DOMContentLoaded', () =>  {
     randomNumber = Math.floor(Math.random() * squares.length)
     if (squares[randomNumber].innerHTML == 0) {
       squares[randomNumber].innerHTML = 2
+      adjustFontSize();
       checkForGameOver()
     } else generate()
+  }
+
+  function adjustFontSize() {
+    for (let i=0; i < squares.length; i++) {
+      if (parseInt(squares[i].innerHTML) >= 1000) {
+        squares[i].classList.add('four-digits');
+      } else {
+        squares[i].classList.remove('four-digits');
+      }
+    }
   }
 
   function moveRight() {
@@ -76,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () =>  {
     }
   }
 
-
   function moveUp() {
     for (let i=0; i < 5; i++) {
       let totalOne = squares[i].innerHTML
@@ -87,15 +97,15 @@ document.addEventListener('DOMContentLoaded', () =>  {
       let column = [parseInt(totalOne), parseInt(totalTwo), parseInt(totalThree), parseInt(totalFour), parseInt(totalFive)]
 
       let filteredColumn = column.filter(num => num)
-      let missing = 5 - filteredColumn.length //
+      let missing = 5 - filteredColumn.length
       let zeros = Array(missing).fill(0)
       let newColumn = filteredColumn.concat(zeros)
 
       squares[i].innerHTML = newColumn[0]
       squares[i +width].innerHTML = newColumn[1]
-      squares[i+(width*2)].innerHTML = newColumn[2]
-      squares[i+(width*3)].innerHTML = newColumn[3]
-      squares[i+(width*4)].innerHTML = newColumn[4]
+      squares[i +(width*2)].innerHTML = newColumn[2]
+      squares[i +(width*3)].innerHTML = newColumn[3]
+      squares[i +(width*4)].innerHTML = newColumn[4]
     }
   }
 
@@ -107,18 +117,17 @@ document.addEventListener('DOMContentLoaded', () =>  {
       let totalFour = squares[i+(width*3)].innerHTML
       let totalFive = squares[i+(width*4)].innerHTML
       let column = [parseInt(totalOne), parseInt(totalTwo), parseInt(totalThree), parseInt(totalFour), parseInt(totalFive)]
-      
 
       let filteredColumn = column.filter(num => num)
-      let missing = 5 - filteredColumn.length 
+      let missing = 5 - filteredColumn.length
       let zeros = Array(missing).fill(0)
       let newColumn = zeros.concat(filteredColumn)
 
       squares[i].innerHTML = newColumn[0]
       squares[i +width].innerHTML = newColumn[1]
-      squares[i+(width*2)].innerHTML = newColumn[2]
-      squares[i+(width*3)].innerHTML = newColumn[3]
-      squares[i+(width*4)].innerHTML = newColumn[4]
+      squares[i +(width*2)].innerHTML = newColumn[2]
+      squares[i +(width*3)].innerHTML = newColumn[3]
+      squares[i +(width*4)].innerHTML = newColumn[4]
     }
   }
 
@@ -132,8 +141,9 @@ document.addEventListener('DOMContentLoaded', () =>  {
         scoreDisplay.innerHTML = score
       }
     }
-      checkForWin()
-    }
+    adjustFontSize();
+    checkForWin()
+  }
 
   function combineColumn() {
     for (let i =0; i < 20; i++) {
@@ -145,17 +155,18 @@ document.addEventListener('DOMContentLoaded', () =>  {
         scoreDisplay.innerHTML = score
       }
     }
+    adjustFontSize();
     checkForWin()
   }
 
-  //assign functions to keyCodes
+  //assign keycodes
   function control(e) {
-    if(e.keyCode === 37) {
+    if(e.keyCode === 39) {
+      keyRight()
+    } else if (e.keyCode === 37) {
       keyLeft()
     } else if (e.keyCode === 38) {
       keyUp()
-    } else if (e.keyCode === 39) {
-      keyRight()
     } else if (e.keyCode === 40) {
       keyDown()
     }
@@ -166,6 +177,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
     moveRight()
     combineRow()
     moveRight()
+    adjustFontSize();
     generate()
   }
 
@@ -173,6 +185,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
     moveLeft()
     combineRow()
     moveLeft()
+    adjustFontSize();
     generate()
   }
 
@@ -180,6 +193,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
     moveUp()
     combineColumn()
     moveUp()
+    adjustFontSize();
     generate()
   }
 
@@ -187,6 +201,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
     moveDown()
     combineColumn()
     moveDown()
+    adjustFontSize();
     generate()
   }
 
@@ -194,9 +209,8 @@ document.addEventListener('DOMContentLoaded', () =>  {
   function checkForWin() {
     for (let i=0; i < squares.length; i++) {
       if (squares[i].innerHTML == 2048) {
-        resultDisplay.innerHTML = 'You WIN'
+        resultDisplay.innerHTML = 'You WIN!'
         document.removeEventListener('keyup', control)
-        setTimeout(() => clear(), 3000)
       }
     }
   }
@@ -210,14 +224,12 @@ document.addEventListener('DOMContentLoaded', () =>  {
       }
     }
     if (zeros === 0) {
-      resultDisplay.innerHTML = 'You LOSE'
+      resultDisplay.innerHTML = 'You LOSE!'
       document.removeEventListener('keyup', control)
-      setTimeout(() => clear(), 3000)
     }
   }
-
-  //clear timer
-  function clear() {
+   //clear timer
+   function clear() {
     clearInterval(myTimer)
   }
 
