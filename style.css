@@ -22,18 +22,17 @@ body {
     justify-content: space-between;
     margin-bottom: 20px;
   }
-  
+
   .grid{
     display: flex;
     flex-wrap: wrap;
-    width: 432px;
-    height: 432px;
+    width: 540px;
+    height: 540px;
     background-color: #000101;
     border: 7px solid #000101;
     border-radius: 12px;
     margin-top: 20px;
-  }
-  
+}
   .grid div {
     width: 100px;
     height: 100px;
@@ -44,7 +43,7 @@ body {
     text-align: center;
     font-size: 60px;
     line-height: 1.6;
-  }
+}
   
   .score-container {
     text-align: center;
