@@ -8,7 +8,7 @@ This repository contains the code for a 5x5 version of the popular game 2048. In
 
 Use your arrow keys to move the tiles. When two tiles with the same number touch, they merge into one! The game is won when a tile with a number 2048 is created. If the grid fills up and there's no room for a new tile, the game is over.
 
-You can **[play the game here]** (https://users.metropolia.fi/~annlinde/WebDevelopmentProjects/2048%20JS%20game/).
+You can [play the game here](https://users.metropolia.fi/~annlinde/WebDevelopmentProjects/2048%20JS%20game/).
 
 ## Key JavaScript Concepts Practiced
 
